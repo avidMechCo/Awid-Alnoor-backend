@@ -20,6 +20,7 @@ CREATE TABLE IF NOT EXISTS `product` (
   title varchar(255) NOT NULL,
   description varchar(255),
   web_url varchar(255),
+  example_url varchar(255),
   FOREIGN KEY (category_id) REFERENCES category(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

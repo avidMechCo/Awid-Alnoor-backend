@@ -8,12 +8,13 @@ const SQLModel = function (sql_model) {
     this.title = sql_model.title;
     this.description = sql_model.description;
     this.web_url = sql_model.web_url;
+    this.example_url = sql_model.example_url;
 };
 
 SQLModel.updateById = (id, object, result) => {
     sql.query(
         `UPDATE ${sql_table_name} SET category_id = ?,title = ?, description = ?, image_url = ? WHERE id = ?`,
-        [object.category_id,object.title, object.description, object.web_url, id],
+        [object.category_id,object.title, object.description, object.web_url, object.example_url, id],
         (err, res) => {
             if (err) {
                 console.log("error: ", err);
@@ -72,7 +73,7 @@ SQLModel.getAll = (title, result) => {
     if (title) {
         query += ` WHERE title LIKE '%${title}%'`;
     }
-    console.log(query)
+
     sql.query(query, (err, res) => {
         if (err) {
             console.log("error: ", err);
