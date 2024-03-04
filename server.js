@@ -21,8 +21,9 @@ app.get("/", (req, res) => {
   res.json({ message: "Welcome to Awid Alnoor application." });
 });
 
-require("./app/routes/tutorial.routes.js")(app);
 require("./app/routes/category.routes.js")(app);
+require("./app/routes/service.routes")(app);
+require("./app/routes/product.routes")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8383;

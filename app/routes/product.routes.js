@@ -1,7 +1,7 @@
 module.exports = app => {
-    const objectController = require("../controllers/category.controller");
+    const objectController = require("../controllers/product.controller");
 
-    const added_url = 'category'
+    const added_url = 'product'
 
     let router = require("express").Router();
 

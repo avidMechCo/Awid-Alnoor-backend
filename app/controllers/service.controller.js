@@ -1,6 +1,6 @@
-const ObjectModel = require("../models/category.model");
+const ObjectModel = require("../models/service.model");
 
-const sql_table_name = 'category'
+const sql_table_name = 'service'
 
 // Create and Save a new Tutorial
 exports.create = (req, res) => {
@@ -13,7 +13,7 @@ exports.create = (req, res) => {
 
     // Create a Tutorial
     const objectModel = new ObjectModel({
-        service_id: req.body.service_id,
+        title: req.body.title,
         title: req.body.title,
         description: req.body.description,
         image_url: req.body.image_url,
@@ -60,6 +60,7 @@ exports.findOne = (req, res) => {
         } else res.send(data);
     });
 };
+
 
 // Update a Tutorial identified by the id in the request
 exports.update = (req, res) => {

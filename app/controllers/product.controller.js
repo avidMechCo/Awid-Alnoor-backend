@@ -1,6 +1,6 @@
-const ObjectModel = require("../models/category.model");
+const ObjectModel = require("../models/product.model");
 
-const sql_table_name = 'category'
+const sql_table_name = 'product'
 
 // Create and Save a new Tutorial
 exports.create = (req, res) => {
@@ -13,7 +13,6 @@ exports.create = (req, res) => {
 
     // Create a Tutorial
     const objectModel = new ObjectModel({
-        service_id: req.body.service_id,
         title: req.body.title,
         description: req.body.description,
         image_url: req.body.image_url,
