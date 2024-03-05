@@ -61,6 +61,23 @@ exports.findOne = (req, res) => {
     });
 };
 
+// Find all Tutorial by service_id
+exports.findByService = (req, res) => {
+    ObjectModel.findByServiceId(req.params.service_id, (err, data) => {
+        if (err) {
+            if (err.kind === "not_found") {
+                res.status(404).send({
+                    message: `Not found ${sql_table_name} with service_id ${req.params.service_id}.`
+                });
+            } else {
+                res.status(500).send({
+                    message: `Error retrieving ${sql_table_name} with service_id ` + req.params.service_id
+                });
+            }
+        } else res.send(data);
+    });
+};
+
 // Update a Tutorial identified by the id in the request
 exports.update = (req, res) => {
     // Validate Request

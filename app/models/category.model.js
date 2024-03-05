@@ -65,6 +65,25 @@ SQLModel.findById = (id, result) => {
     });
 };
 
+SQLModel.findByServiceId = (service_id, result) => {
+    sql.query(`SELECT *,ser.service_title as service_title FROM ${sql_table_name} obj JOIN (
+            SELECT s.id,s.title as service_title FROM service as s) ser ON obj.service_id=ser.id WHERE service_id = ${service_id}`, (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+            return;
+        }
+
+        if (res.length) {
+            result(null, res);
+            return;
+        }
+
+        // not found Tutorial with the id
+        result({kind: "not_found"}, null);
+    });
+};
+
 SQLModel.getAll = (title, result) => {
     let query = `SELECT *,ser.service_title as service_title FROM ${sql_table_name} obj JOIN (
             SELECT s.id,s.title as service_title FROM service as s) ser ON obj.service_id=ser.id`;

@@ -1,6 +1,6 @@
 const sql = require("./db.js");
 
-const sql_table_name = 'category'
+const sql_table_name = 'service'
 
 // constructor
 const SQLModel = function (sql_model) {

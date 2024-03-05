@@ -14,6 +14,9 @@ module.exports = app => {
     // Retrieve a single Tutorial with id
     router.get("/:id", objectController.findOne);
 
+    // Retrieve a all Tutorial with service_id
+    router.get("/service_id/:service_id", objectController.findByService);
+
     // Update a Tutorial with id
     router.put("/:id", objectController.update);
 
