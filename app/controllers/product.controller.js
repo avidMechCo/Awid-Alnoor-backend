@@ -43,6 +43,23 @@ exports.findAll = (req, res) => {
     });
 };
 
+// Find all Category by category_id
+exports.findByCategory = (req, res) => {
+    ObjectModel.findByCategoryId(req.params.category_id, (err, data) => {
+        if (err) {
+            if (err.kind === "not_found") {
+                res.status(404).send({
+                    message: `Not found ${sql_table_name} with category_id ${req.params.category_id}.`
+                });
+            } else {
+                res.status(500).send({
+                    message: `Error retrieving ${sql_table_name} with category_id ` + req.params.category_id
+                });
+            }
+        } else res.send(data);
+    });
+};
+
 // Find a single Tutorial by Id
 exports.findOne = (req, res) => {
     ObjectModel.findById(req.params.id, (err, data) => {

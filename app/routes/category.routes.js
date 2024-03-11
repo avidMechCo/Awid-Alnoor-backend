@@ -14,8 +14,11 @@ module.exports = app => {
     // Retrieve a single Tutorial with id
     router.get("/:id", objectController.findOne);
 
-    // Retrieve a all Tutorial with service_id
+    // Retrieve a all Category with service_id
     router.get("/service_id/:service_id", objectController.findByService);
+
+    // Retrieve a all category and product with service_id
+    router.get("/service_id/with_pro/:service_id", objectController.findCatProByService);
 
     // Update a Tutorial with id
     router.put("/:id", objectController.update);

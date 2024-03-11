@@ -18,7 +18,9 @@ CREATE TABLE IF NOT EXISTS `product` (
   id int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
   category_id int(11) NOT NULL,
   title varchar(255) NOT NULL,
-  description varchar(255),
+  description varchar(2550),
+  related varchar(255),
+  image_url varchar(255),
   web_url varchar(255),
   example_url varchar(255),
   FOREIGN KEY (category_id) REFERENCES category(id)
@@ -42,7 +44,7 @@ INSERT INTO `category` (`id`, `service_id`, `title`, `description`, `image_url`)
 (2, '1', 'NLP', 'NLP', NULL),
 (3, '1', 'face recognition', 'face recognition', NULL)
 
-INSERT INTO `product` (`id`, `category_id`, `title`, `description`, `web_url`) VALUES (1, '1', 'kid colloring', 'kid colloring', 'http://85.133.185.78:8181/');
+INSERT INTO `product` (`id`, `category_id`, `title`, `description`, `related`, `image_url`, `web_url`, `example_url`) VALUES (NULL, 1, 'kid colloring', 'kid colloring', 'NLP AI', NULL, 'http://85.133.185.78:8181/', 'http://85.133.185.78:8181/');
 
 INSERT INTO `article` (`id`, `title`, `description`, `author`, `source_url`, `image_url`, `show_flag`) VALUES (NULL, 'Fast COVID-19 versus H1N1 screening using optimized parallel inception', 'COVID-19 and swine-origin influenza A (H1N1) are both pandemics that sparked significant concern worldwide. Since these two diseases have common symptoms, a fast COVID-19 versus H1N1 screening helps better manage patients at healthcare facilities. We present a novel deep model, called Optimized Parallel Inception, for fast screening of COVID-19.', 'Alireza Tavakolian et al.', 'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9119711/', 'images/gr11_lrg.jpg', '1');
 INSERT INTO `article` (`id`, `title`, `description`, `author`, `source_url`, `image_url`, `show_flag`) VALUES (NULL, 'Source code for optimized parallel inception: A fast COVID-19 screening software', 'COVID-19 and swine-origin influenza A (H1N1) are both pandemics that sparked significant concern worldwide. These two viruses have the same symptoms and occur at a collision timeline. Optimized Parallel Inception (OPI) presents a new strategy to screen the COVID-19 from H1N1 with use of only symptoms.', 'Alireza Tavakolian et al.', 'https://www.sciencedirect.com/science/article/pii/S2665963822000616', 'images/pic3.png', '1');

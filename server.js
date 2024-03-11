@@ -22,7 +22,7 @@ app.get("/", (req, res) => {
   res.json({ message: "Welcome to Awid Alnoor application." });
 });
 
-require("./app/routes/category.routes.js")(app);
+require("./app/routes/category.routes")(app);
 require("./app/routes/service.routes")(app);
 require("./app/routes/product.routes")(app);
 require("./app/routes/article.routes")(app);

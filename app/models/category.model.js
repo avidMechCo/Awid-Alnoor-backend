@@ -1,5 +1,8 @@
-const sql = require("./db.js");
+const async = require("async");
 
+const sql = require("./db.js");
+const ProModel = require("./product.model");
+// import map from 'async/map';
 const sql_table_name = 'category'
 
 // constructor
@@ -13,7 +16,7 @@ const SQLModel = function (sql_model) {
 SQLModel.updateById = (id, object, result) => {
     sql.query(
         `UPDATE ${sql_table_name} SET service_id = ?,title = ?, description = ?, image_url = ? WHERE id = ?`,
-        [object.service_id,object.title, object.description, object.image_url, id],
+        [object.service_id, object.title, object.description, object.image_url, id],
         (err, res) => {
             if (err) {
                 console.log("error: ", err);
@@ -66,7 +69,7 @@ SQLModel.findById = (id, result) => {
 };
 
 SQLModel.findByServiceId = (service_id, result) => {
-    sql.query(`SELECT *,ser.service_title as service_title FROM ${sql_table_name} obj JOIN (
+    sql.query(`SELECT obj.*,ser.service_title as service_title FROM ${sql_table_name} obj JOIN (
             SELECT s.id,s.title as service_title FROM service as s) ser ON obj.service_id=ser.id WHERE service_id = ${service_id}`, (err, res) => {
         if (err) {
             console.log("error: ", err);
@@ -76,6 +79,34 @@ SQLModel.findByServiceId = (service_id, result) => {
 
         if (res.length) {
             result(null, res);
+            return;
+        }
+
+        // not found Tutorial with the id
+        result({kind: "not_found"}, null);
+    });
+};
+
+SQLModel.findCatProByService = (service_id, result) => {
+    sql.query(`SELECT obj.*,ser.service_title as service_title FROM ${sql_table_name} obj JOIN (
+            SELECT s.id,s.title as service_title FROM service as s) ser ON obj.service_id=ser.id WHERE service_id = ${service_id}`, (err, res) => {
+        if (err) {
+            console.log("error: ", err);
+            result(err, null);
+            return;
+        }
+        if (res.length) {
+            let res_ids = []
+            for (let i = 0; i < res.length; i++) res_ids[i] = res[i].id
+
+            async.map(res_ids, ProModel.findByCategoryId, function (err, results) {
+                let final_result = {}
+                for (let i = 0; i < results.length; i++) {
+                    final_result[res[i].title] = results[i]
+                }
+
+                result(null, final_result);
+            });
             return;
         }
 

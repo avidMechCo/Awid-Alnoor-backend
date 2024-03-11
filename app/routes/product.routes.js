@@ -1,3 +1,4 @@
+const objectController = require("../controllers/category.controller");
 module.exports = app => {
     const objectController = require("../controllers/product.controller");
 
@@ -13,6 +14,9 @@ module.exports = app => {
 
     // Retrieve a single Tutorial with id
     router.get("/:id", objectController.findOne);
+
+    // Retrieve all product with category_id
+    router.get("/category_id/:category_id", objectController.findByCategory);
 
     // Update a Tutorial with id
     router.put("/:id", objectController.update);
